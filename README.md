@@ -1,4 +1,4 @@
-# Google Docs Clone — Enterprise
+# DocFlow — Enterprise
 
 [![CI/CD Pipeline](https://github.com/your-org/google-docs-clone/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-org/google-docs-clone/actions/workflows/ci-cd.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
