@@ -1,6 +1,5 @@
 # DocFlow — Enterprise
 
-[![CI/CD Pipeline](https://github.com/your-org/google-docs-clone/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-org/google-docs-clone/actions/workflows/ci-cd.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/21/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -32,7 +31,6 @@ A **production-grade, real-time collaborative document editor** inspired by Goog
 15. [Security](#security)
 16. [Performance](#performance)
 17. [Contributing](#contributing)
-18. [License](#license)
 
 ---
 
