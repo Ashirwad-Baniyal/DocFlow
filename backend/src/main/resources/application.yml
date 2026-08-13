@@ -8,18 +8,20 @@ spring:
     name: enterprise-docs-backend
 
   # ─── MySQL DataSource ───────────────────────────────────────────────────────
+  # SPRING_DATASOURCE_URL env var overrides the assembled URL below (recommended for Aiven/TiDB Cloud)
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:docdb}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:docdb}?useSSL=true&requireSSL=true&sslMode=REQUIRED&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:rootpass}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: 20
-      minimum-idle: 5
-      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 60000
       idle-timeout: 600000
       max-lifetime: 1800000
       pool-name: DocHikariCP
+      connection-test-query: SELECT 1
 
   # ─── JPA / Hibernate ────────────────────────────────────────────────────────
   jpa:
@@ -70,6 +72,7 @@ spring:
       enable-auto-commit: false
     listener:
       ack-mode: MANUAL_IMMEDIATE
+      auto-startup: ${SPRING_KAFKA_LISTENER_AUTO_STARTUP:false}
 
   # ─── Mail ───────────────────────────────────────────────────────────────────
   mail:
@@ -180,3 +183,26 @@ spring:
     redis:
       host: localhost
       port: 6379
+
+---
+# ─── Production Profile (Render + Aiven MySQL / TiDB Cloud) ──────────────────
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    hibernate:
+      # Use update in prod so Render deployments auto-apply schema changes
+      # Switch to validate once schema is stable
+      ddl-auto: update
+    show-sql: false
+  kafka:
+    listener:
+      auto-startup: false  # Disable Kafka consumers if no broker available
+
+logging:
+  level:
+    root: WARN
+    com.enterprise.docs: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
