@@ -65,7 +65,7 @@ EXPOSE 8080
 # JVM tuning for containers (Java 21 auto-detects cgroups)
 ENV JAVA_OPTS="\
   -Xms128m \
-  -Xmx256m \
+  -Xmx384m \
   -XX:+UseContainerSupport \
   -XX:+ExitOnOutOfMemoryError \
   -Dfile.encoding=UTF-8 \
