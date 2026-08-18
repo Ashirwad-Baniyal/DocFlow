@@ -64,14 +64,10 @@ EXPOSE 8080
 
 # JVM tuning for containers (Java 21 auto-detects cgroups)
 ENV JAVA_OPTS="\
-  -server \
+  -Xms128m \
+  -Xmx256m \
   -XX:+UseContainerSupport \
-  -XX:MaxRAMPercentage=75.0 \
-  -XX:InitialRAMPercentage=50.0 \
-  -XX:+UseG1GC \
-  -XX:MaxGCPauseMillis=200 \
   -XX:+ExitOnOutOfMemoryError \
-  -Djava.security.egd=file:/dev/./urandom \
   -Dfile.encoding=UTF-8 \
   -Dspring.profiles.active=docker"
 
